@@ -2,16 +2,23 @@ import CreateSessionService from './CreateSessionService';
 import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
+import FakeTokenProvider from '../providers/TokenProvider/fakes/FakeTokenProvider';
 
 let sut: CreateSessionService;
 let fakeUserRepository: FakeUserRepository;
 let fakeHashProvider: FakeHashProvider;
+let fakeTokenProvider: FakeTokenProvider;
 
 describe('CreateSession', () => {
   beforeEach(() => {
     fakeUserRepository = new FakeUserRepository();
     fakeHashProvider = new FakeHashProvider();
-    sut = new CreateSessionService(fakeUserRepository, fakeHashProvider);
+    fakeTokenProvider = new FakeTokenProvider();
+    sut = new CreateSessionService(
+      fakeUserRepository,
+      fakeHashProvider,
+      fakeTokenProvider,
+    );
   });
 
   it('should be called with correct params', async () => {
@@ -44,5 +51,15 @@ describe('CreateSession', () => {
         password: 'invalid-password',
       }),
     ).rejects.toBeInstanceOf(HttpRequestError);
+  });
+
+  it('should be able to authenticate', async () => {
+    const response = await sut.execute({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    expect(response).toHaveProperty('token');
+    expect(response).toHaveProperty('user');
   });
 });
