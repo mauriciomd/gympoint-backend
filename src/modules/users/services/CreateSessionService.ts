@@ -42,7 +42,7 @@ class CreateSessionService {
       throw new HttpRequestError('Invalid email/password');
     }
 
-    const token = await this.tokenProvider.sign(user.id);
+    const token = this.tokenProvider.sign(user.id);
 
     return {
       user,

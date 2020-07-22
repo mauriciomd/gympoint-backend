@@ -1,3 +1,3 @@
 export default interface ITokenProvider {
-  sign(payload: string): Promise<string>;
+  sign(payload: string): string;
 }

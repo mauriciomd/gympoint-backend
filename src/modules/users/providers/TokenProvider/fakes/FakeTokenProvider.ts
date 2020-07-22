@@ -1,7 +1,7 @@
 import ITokenProvider from '../models/ITokenProvider';
 
 class FakeTokenProvider implements ITokenProvider {
-  public async sign(payload: string): Promise<string> {
+  public sign(payload: string): string {
     return payload;
   }
 }
