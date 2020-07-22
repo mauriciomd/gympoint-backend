@@ -1,4 +1,6 @@
-import CreateSessionService from './CreateSessionService';
+import 'reflect-metadata';
+
+import CreateSessionService from '../services/CreateSessionService';
 import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
@@ -9,7 +11,7 @@ let fakeUserRepository: FakeUserRepository;
 let fakeHashProvider: FakeHashProvider;
 let fakeTokenProvider: FakeTokenProvider;
 
-describe('CreateSession', () => {
+describe('Unit Test: CreateSession', () => {
   beforeEach(() => {
     fakeUserRepository = new FakeUserRepository();
     fakeHashProvider = new FakeHashProvider();
