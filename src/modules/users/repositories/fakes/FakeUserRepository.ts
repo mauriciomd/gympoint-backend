@@ -9,6 +9,7 @@ class FakeUserRepository implements IUserRepository {
     user.id = '123';
     user.name = 'Administrador';
     user.email = 'admin@gympoint.com';
+    user.password = '123456';
     user.createdAt = new Date();
     user.updatedAt = new Date();
 
