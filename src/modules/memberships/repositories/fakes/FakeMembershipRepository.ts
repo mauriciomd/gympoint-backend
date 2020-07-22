@@ -1,0 +1,31 @@
+import { uuid } from 'uuidv4';
+
+import IMembershipRepository from '../IMembershipRepository';
+import { ICreateMembershipDTO } from '../../dtos/ICreateMembershipDTO';
+import Membership from '../../infra/typeorm/entities/Membership';
+
+class FakeMembershipRepository implements IMembershipRepository {
+  private storedMemberships: Membership[] = [];
+
+  public async create({
+    title,
+    duration,
+    price,
+  }: ICreateMembershipDTO): Promise<Membership> {
+    const membership = new Membership();
+
+    Object.assign(membership, {
+      id: uuid(),
+      title,
+      duration,
+      price,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    this.storedMemberships.push(membership);
+
+    return membership;
+  }
+}
+
+export default FakeMembershipRepository;

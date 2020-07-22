@@ -1,11 +1,13 @@
 import CreateMembershipService from '../services/CreateMembershipService';
+import FakeMembershipRepository from '../repositories/fakes/FakeMembershipRepository';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
 
 let sut: CreateMembershipService;
-
+let fakeMembershipRepository: FakeMembershipRepository;
 describe('Unit test: CreateMembership', () => {
   beforeEach(() => {
-    sut = new CreateMembershipService();
+    fakeMembershipRepository = new FakeMembershipRepository();
+    sut = new CreateMembershipService(fakeMembershipRepository);
   });
 
   it('should be called with correct params', async () => {
@@ -42,5 +44,16 @@ describe('Unit test: CreateMembership', () => {
         price: -5,
       }),
     ).rejects.toBeInstanceOf(HttpRequestError);
+  });
+
+  it('should be able to create a membership option', async () => {
+    const membership = await sut.execute({
+      title: 'Valid title',
+      duration: 12,
+      price: 69,
+    });
+
+    expect(membership).toHaveProperty('id');
+    expect(membership).toHaveProperty('title');
   });
 });
