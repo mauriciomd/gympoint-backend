@@ -33,4 +33,14 @@ describe('Unit test: CreateMembership', () => {
       }),
     ).rejects.toBeInstanceOf(HttpRequestError);
   });
+
+  it('should not be able to create a membership with price less than 0', async () => {
+    await expect(
+      sut.execute({
+        title: 'Valid title',
+        duration: 10,
+        price: -5,
+      }),
+    ).rejects.toBeInstanceOf(HttpRequestError);
+  });
 });

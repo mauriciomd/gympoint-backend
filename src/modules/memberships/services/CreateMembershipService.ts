@@ -14,6 +14,12 @@ class CreateMembershipService {
         'Invalid duration. User a number greater than 0',
       );
     }
+
+    if (price < 1) {
+      throw new HttpRequestError(
+        'Invalid price. User a number greater or equal to 0',
+      );
+    }
   }
 }
 
