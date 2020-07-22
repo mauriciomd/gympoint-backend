@@ -15,7 +15,13 @@ class CreateSessionService {
     this.userRepository = userRepository;
   }
 
-  public async execute({ email, password }: ICreateSessionDTO): Promise<void> { }
+  public async execute({ email, password }: ICreateSessionDTO): Promise<void> {
+    const user = await this.userRepository.findByEmail(email);
+
+    if (!user) {
+      throw new HttpRequestError('Invalid user');
+    }
+  }
 }
 
 export default CreateSessionService;

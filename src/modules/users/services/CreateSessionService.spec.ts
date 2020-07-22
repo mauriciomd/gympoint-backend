@@ -24,4 +24,13 @@ describe('CreateSession', () => {
       password: '123456',
     });
   });
+
+  it('shoud not be able to authenticate with invalid user', async () => {
+    await expect(
+      sut.execute({
+        email: 'invalid@email.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(HttpRequestError);
+  });
 });
