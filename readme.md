@@ -15,11 +15,13 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 
 ### App endpoints:
 
-- 
+- /sessions : allow to admins authenticate in the app.
 
-### Tests Suite:
+### Tests Suite
 
-- 
+- module: user
+  - CreateSessionService - Unit tests
+  - CreateSession: Integration Test
 
 ### How to build:
 
@@ -43,4 +45,20 @@ This is the backend app which is used to manage a gym, where an admin can sign u
   npm install
   npm run typeorm migration:run
   npm run dev:server 
+```
+
+- Default user:
+  - email: admin@gympoint.com
+  - password: 123456
+
+### Running tests:
+
+- First of all, ensure that you have postgres running with a database called "gympoint_tests".
+
+````
+  // using yarn
+  yarn test
+
+  // using npm
+  npm run test
 ```
