@@ -38,7 +38,6 @@ class CreateSessionService {
     if (!user) {
       throw new HttpRequestError('Invalid email/password');
     }
-
     const isPasswordMatched = await this.hashProver.compare({
       payload: password,
       compareTo: user.password,
