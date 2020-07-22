@@ -1,12 +1,13 @@
+import { injectable, inject } from 'tsyringe';
+
 import { ICreateSessionDTO } from '../dtos/ICreateSessionDTO';
-
 import { ISessionDTO } from '../dtos/ISessionDTO';
-
-import IUserRepository from '../repositories/IUserRepository';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
+import IUserRepository from '../repositories/IUserRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import ITokenProvider from '../providers/TokenProvider/models/ITokenProvider';
 
+@injectable()
 class CreateSessionService {
   private userRepository: IUserRepository;
 
@@ -15,8 +16,13 @@ class CreateSessionService {
   private tokenProvider: ITokenProvider;
 
   constructor(
+    @inject('UserRepository')
     userRepository: IUserRepository,
+
+    @inject('HashProvider')
     hashProvider: IHashProvider,
+
+    @inject('TokenProvider')
     tokenProvider: ITokenProvider,
   ) {
     this.userRepository = userRepository;
