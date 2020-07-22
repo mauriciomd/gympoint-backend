@@ -27,6 +27,11 @@ class CreateMembershipService {
       );
     }
 
+    const hasMembership = await this.membershipRepository.findByTile(title);
+    if (hasMembership) {
+      throw new HttpRequestError('This title is already used');
+    }
+
     const membership = await this.membershipRepository.create({
       title,
       duration,

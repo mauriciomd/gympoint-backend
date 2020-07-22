@@ -26,6 +26,14 @@ class FakeMembershipRepository implements IMembershipRepository {
 
     return membership;
   }
+
+  public async findByTile(title: string): Promise<Membership | undefined> {
+    const hasFoundMembership = this.storedMemberships.find(
+      membership => membership.title === title,
+    );
+
+    return hasFoundMembership;
+  }
 }
 
 export default FakeMembershipRepository;

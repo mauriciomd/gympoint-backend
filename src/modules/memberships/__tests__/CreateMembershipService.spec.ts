@@ -56,4 +56,20 @@ describe('Unit test: CreateMembership', () => {
     expect(membership).toHaveProperty('id');
     expect(membership).toHaveProperty('title');
   });
+
+  it('should not be able to create a membership with the an used title', async () => {
+    await sut.execute({
+      title: 'Valid title',
+      duration: 12,
+      price: 69,
+    });
+
+    await expect(
+      sut.execute({
+        title: 'Valid title',
+        duration: 12,
+        price: 69,
+      }),
+    ).rejects.toBeInstanceOf(HttpRequestError);
+  });
 });
