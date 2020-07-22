@@ -6,10 +6,9 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 ### Techs and libraries:
 
 - Typescript
-- DDD
 - TypeORM (PostgreSQL)
-- Jest (TDD)
-- Express JS
+- Jest and Supertest (TDD)
+- ExpressJS
 - BCryptJS
 - JsonWebToken
 - TSyringe (dependency injection)
