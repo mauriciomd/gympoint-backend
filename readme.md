@@ -3,13 +3,16 @@
 ### About
 This is the backend app which is used to manage a gym, where an admin can sign up students, manage enrollments, and the memberships.
 
-### Techs:
+### Techs and libraries:
 
 - Typescript
-- TDD
 - DDD
 - TypeORM (PostgreSQL)
+- Jest (TDD)
 - Express JS
+- BCryptJS
+- JsonWebToken
+- TSyringe (dependency injection)
 
 ### App endpoints:
 
@@ -17,11 +20,13 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 
 ### Tests Suite:
 
--
+- 
 
 ### How to build:
-  - Requeriments:
-    - NodeJs.
+
+- Requeriments:
+  - NodeJs.
+  - PostgreSQL
 
 - First of all, ensure that you have postgres running with a database called "gympoint".
 
