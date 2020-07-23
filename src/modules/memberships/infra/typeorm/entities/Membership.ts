@@ -15,7 +15,7 @@ class Membership {
   title!: string;
 
   @Column()
-  durantion!: number;
+  duration!: number;
 
   @Column()
   price!: number;
