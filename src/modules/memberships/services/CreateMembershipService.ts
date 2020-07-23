@@ -1,12 +1,18 @@
+import { injectable, inject } from 'tsyringe';
+
 import IMembershipRepository from '../repositories/IMembershipRepository';
 import { ICreateMembershipDTO } from '../dtos/ICreateMembershipDTO';
 import Membership from '../infra/typeorm/entities/Membership';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
 
+@injectable()
 class CreateMembershipService {
   private membershipRepository: IMembershipRepository;
 
-  constructor(membershipRepository: IMembershipRepository) {
+  constructor(
+    @inject('MembershipRepository')
+    membershipRepository: IMembershipRepository,
+  ) {
     this.membershipRepository = membershipRepository;
   }
 
