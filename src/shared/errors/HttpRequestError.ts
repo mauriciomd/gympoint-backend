@@ -1,7 +1,7 @@
 class HttpRequestError {
-  private statusCode: number;
+  statusCode: number;
 
-  private message: string;
+  message: string;
 
   constructor(message: string, statusCode = 400) {
     this.message = message;
