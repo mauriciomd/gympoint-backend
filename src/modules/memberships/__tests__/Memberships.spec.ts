@@ -6,7 +6,7 @@ import app from '../../../shared/infra/http/app';
 let connection: Connection;
 describe('/memberships', () => {
   beforeAll(async () => {
-    connection = await createConnection('tests');
+    connection = await createConnection();
     await connection.runMigrations();
   });
 
