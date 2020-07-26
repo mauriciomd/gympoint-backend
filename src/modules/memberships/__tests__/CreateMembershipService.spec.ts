@@ -69,8 +69,8 @@ describe('Unit test: CreateMembership', () => {
     await expect(
       sut.execute({
         title: 'Valid title',
-        duration: 12,
-        price: 69,
+        duration: 11,
+        price: 99,
       }),
     ).rejects.toBeInstanceOf(HttpRequestError);
   });
