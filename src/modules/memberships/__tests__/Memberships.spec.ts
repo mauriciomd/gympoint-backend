@@ -82,4 +82,26 @@ describe('/memberships', () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('message');
   });
+
+  it('should be able to create a new membership', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const response = await request(app)
+      .post('/memberships')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        title: 'valid title',
+        price: 59,
+        duration: 12,
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('title');
+    expect(response.body).toHaveProperty('price');
+    expect(response.body).toHaveProperty('duration');
+  });
 });
