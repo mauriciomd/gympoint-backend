@@ -22,6 +22,10 @@ class MembershipController {
         throw new HttpRequestError('You must inform a price');
       }
 
+      if (!duration) {
+        throw new HttpRequestError('You must inform a duration');
+      }
+
       const membership = await service.execute({
         title,
         price,
