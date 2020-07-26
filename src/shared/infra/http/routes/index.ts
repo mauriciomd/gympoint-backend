@@ -10,7 +10,7 @@ const authMiddleware = container.resolve(RequireAuthenticateMiddleware);
 
 router.use('/sessions', sessionRoutes);
 
-router.use(authMiddleware.ensure);
+router.use(authMiddleware.ensure.bind(authMiddleware));
 router.use('/memberships', membershipRoutes);
 
 export default router;
