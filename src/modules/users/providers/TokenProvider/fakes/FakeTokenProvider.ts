@@ -5,8 +5,8 @@ class FakeTokenProvider implements ITokenProvider {
     return payload;
   }
 
-  public verify(token: string): boolean {
-    return token !== '';
+  public verify(token: string): string {
+    return token;
   }
 }
 
