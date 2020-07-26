@@ -28,4 +28,22 @@ describe('/memberships', () => {
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty('message');
   });
+
+  it('should not be able to create a new membership without a title', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const response = await request(app)
+      .post('/memberships')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        price: 100,
+        duration: 12,
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('message');
+  });
 });
