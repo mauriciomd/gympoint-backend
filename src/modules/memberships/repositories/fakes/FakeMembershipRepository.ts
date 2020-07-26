@@ -34,6 +34,10 @@ class FakeMembershipRepository implements IMembershipRepository {
 
     return hasFoundMembership;
   }
+
+  public async findAll(): Promise<Membership[]> {
+    return [...this.storedMemberships];
+  }
 }
 
 export default FakeMembershipRepository;

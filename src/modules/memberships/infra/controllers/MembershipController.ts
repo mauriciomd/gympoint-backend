@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
 import CreateMembershipService from '../../services/CreateMembershipService';
+import ListMembershipService from '../../services/ListMembershipService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class MembershipController {
@@ -38,6 +39,13 @@ class MembershipController {
     }
 
     return undefined;
+  }
+
+  public async index(_: Request, response: Response): Promise<Response> {
+    const service = container.resolve(ListMembershipService);
+    const memberships = await service.execute();
+
+    return response.json(memberships);
   }
 }
 

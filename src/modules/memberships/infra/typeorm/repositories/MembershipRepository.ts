@@ -35,6 +35,12 @@ class MembershipRepository implements IMembershipRepository {
 
     return membership;
   }
+
+  public async findAll(): Promise<Membership[]> {
+    const memberships = await this.membershipRepository.find();
+
+    return memberships;
+  }
 }
 
 export default MembershipRepository;
