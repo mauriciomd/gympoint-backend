@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import CreateMembershipService from '../services/CreateMembershipService';
 import FakeMembershipRepository from '../repositories/fakes/FakeMembershipRepository';
 import HttpRequestError from '../../../shared/errors/HttpRequestError';
