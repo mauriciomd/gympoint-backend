@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateMembershipService from '../../services/CreateMembershipService';
 import ListMembershipService from '../../services/ListMembershipService';
 import ShowMembershipService from '../../services/ShowMembershipService';
+import DeleteMembershipService from '../../services/DeleteMembershipService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class MembershipController {
@@ -49,13 +50,40 @@ class MembershipController {
     return response.json(memberships);
   }
 
-  public async show(request: Request, response: Response): Promise<Response> {
+  public async show(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
     const { membershipId } = request.params;
-
     const service = container.resolve(ShowMembershipService);
-    const memberships = await service.execute(membershipId);
 
-    return response.json(memberships);
+    try {
+      const memberships = await service.execute(membershipId);
+      return response.json(memberships);
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { membershipId } = request.params;
+    const service = container.resolve(DeleteMembershipService);
+
+    try {
+      await service.execute(membershipId);
+      return response.send();
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
   }
 }
 

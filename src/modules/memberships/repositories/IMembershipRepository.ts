@@ -6,4 +6,5 @@ export default interface IMembershipRepository {
   findByTile(title: string): Promise<Membership | undefined>;
   findById(membershipId: string): Promise<Membership | undefined>;
   findAll(): Promise<Membership[]>;
+  delete(membershipId: string): Promise<void>;
 }

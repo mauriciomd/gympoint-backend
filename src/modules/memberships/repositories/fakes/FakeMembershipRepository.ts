@@ -46,6 +46,12 @@ class FakeMembershipRepository implements IMembershipRepository {
   public async findAll(): Promise<Membership[]> {
     return [...this.storedMemberships];
   }
+
+  public async delete(membershipId: string): Promise<void> {
+    this.storedMemberships = this.storedMemberships.filter(
+      membership => membership.id !== membershipId,
+    );
+  }
 }
 
 export default FakeMembershipRepository;

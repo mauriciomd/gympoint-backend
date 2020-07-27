@@ -15,9 +15,9 @@ describe('/memberships', () => {
   });
 
   afterAll(async () => {
-    await connection.query('DROP TABLE IF EXISTS memberships');
-    await connection.query('DROP TABLE IF EXISTS users');
-    await connection.query('DROP TABLE IF EXISTS migrations');
+    // await connection.query('DROP TABLE IF EXISTS memberships');
+    // await connection.query('DROP TABLE IF EXISTS users');
+    // await connection.query('DROP TABLE IF EXISTS migrations');
 
     await connection.close();
   });
@@ -154,5 +154,32 @@ describe('/memberships', () => {
     expect(response.status).toBe(200);
     expect(response.body.id).toBe(membership.body.id);
     expect(response.body.title).toBe(membership.body.title);
+  });
+
+  it('should be able to delete a specific membership', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const membership = await request(app)
+      .post('/memberships')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        title: 'Membership Silver',
+        price: 99,
+        duration: 12,
+      });
+
+    const response = await request(app)
+      .delete(`/memberships/${membership.body.id}`)
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    const membershipList = await request(app)
+      .get('/memberships')
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(membershipList.body).toHaveLength(0);
   });
 });

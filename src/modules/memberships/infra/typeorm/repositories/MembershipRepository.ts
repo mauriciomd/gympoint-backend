@@ -51,6 +51,10 @@ class MembershipRepository implements IMembershipRepository {
 
     return memberships;
   }
+
+  public async delete(membershipId: string): Promise<void> {
+    await this.membershipRepository.delete({ id: membershipId });
+  }
 }
 
 export default MembershipRepository;
