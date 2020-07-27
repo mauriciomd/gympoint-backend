@@ -36,6 +36,16 @@ class MembershipRepository implements IMembershipRepository {
     return membership;
   }
 
+  public async findById(membershipId: string): Promise<Membership | undefined> {
+    const membership = await this.membershipRepository.findOne({
+      where: {
+        id: membershipId,
+      },
+    });
+
+    return membership;
+  }
+
   public async findAll(): Promise<Membership[]> {
     const memberships = await this.membershipRepository.find();
 

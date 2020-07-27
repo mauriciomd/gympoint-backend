@@ -35,6 +35,14 @@ class FakeMembershipRepository implements IMembershipRepository {
     return hasFoundMembership;
   }
 
+  public async findById(membershipId: string): Promise<Membership | undefined> {
+    const hasFoundMembership = this.storedMemberships.find(
+      membership => membership.id === membershipId,
+    );
+
+    return hasFoundMembership;
+  }
+
   public async findAll(): Promise<Membership[]> {
     return [...this.storedMemberships];
   }

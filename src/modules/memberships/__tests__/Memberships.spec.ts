@@ -131,4 +131,28 @@ describe('/memberships', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
   });
+
+  it('should be able to show a specific membership', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const membership = await request(app)
+      .post('/memberships')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        title: 'Membership Silver',
+        price: 99,
+        duration: 12,
+      });
+
+    const response = await request(app)
+      .get(`/memberships/${membership.body.id}`)
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.id).toBe(membership.body.id);
+    expect(response.body.title).toBe(membership.body.title);
+  });
 });

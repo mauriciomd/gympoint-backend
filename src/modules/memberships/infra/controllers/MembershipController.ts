@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateMembershipService from '../../services/CreateMembershipService';
 import ListMembershipService from '../../services/ListMembershipService';
+import ShowMembershipService from '../../services/ShowMembershipService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class MembershipController {
@@ -44,6 +45,15 @@ class MembershipController {
   public async index(_: Request, response: Response): Promise<Response> {
     const service = container.resolve(ListMembershipService);
     const memberships = await service.execute();
+
+    return response.json(memberships);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { membershipId } = request.params;
+
+    const service = container.resolve(ShowMembershipService);
+    const memberships = await service.execute(membershipId);
 
     return response.json(memberships);
   }
