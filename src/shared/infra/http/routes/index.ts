@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import RequireAuthenticateMiddleware from '../../../../modules/users/infra/middlewares/RequireAuthentication';
 import sessionRoutes from '../../../../modules/users/infra/routes/session.routes';
 import membershipRoutes from '../../../../modules/memberships/infra/routes/membership.routes';
+import studentsRoutes from '../../../../modules/students/infra/routes/students.routes';
 
 const router = Router();
 const authMiddleware = container.resolve(RequireAuthenticateMiddleware);
@@ -12,5 +13,6 @@ router.use('/sessions', sessionRoutes);
 
 router.use(authMiddleware.ensure.bind(authMiddleware));
 router.use('/memberships', membershipRoutes);
+router.use('/students', studentsRoutes);
 
 export default router;
