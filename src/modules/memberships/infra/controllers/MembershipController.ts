@@ -13,22 +13,17 @@ class MembershipController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | undefined> {
-    const { title, price, duration } = request.body;
+    const bodyProperties = ['title', 'price', 'duration'];
+
     const service = container.resolve(CreateMembershipService);
-
     try {
-      if (!title) {
-        throw new HttpRequestError('You must inform a title');
-      }
+      bodyProperties.forEach(property => {
+        if (!request.body[property]) {
+          throw new HttpRequestError(`Missing params: ${property}`);
+        }
+      });
 
-      if (!price) {
-        throw new HttpRequestError('You must inform a price');
-      }
-
-      if (!duration) {
-        throw new HttpRequestError('You must inform a duration');
-      }
-
+      const { title, price, duration } = request.body;
       const membership = await service.execute({
         title,
         price,
