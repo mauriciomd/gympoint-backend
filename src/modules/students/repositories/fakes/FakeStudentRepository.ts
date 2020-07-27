@@ -17,6 +17,10 @@ class FakeStudentRepository implements IStudentRepository {
     this.storedStudents.push(student);
     return student;
   }
+
+  public async findByEmail(email: string): Promise<Student | undefined> {
+    return this.storedStudents.find(student => student.email === email);
+  }
 }
 
 export default FakeStudentRepository;

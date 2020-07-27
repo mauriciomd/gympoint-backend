@@ -16,6 +16,14 @@ class StudentRepository implements IStudentRepository {
     await this.ormRepository.save(student);
     return student;
   }
+
+  public async findByEmail(email: string): Promise<Student | undefined> {
+    return this.ormRepository.findOne({
+      where: {
+        email,
+      },
+    });
+  }
 }
 
 export default StudentRepository;
