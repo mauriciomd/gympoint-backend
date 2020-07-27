@@ -15,13 +15,26 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 
 ### App endpoints:
 
-- /sessions : allow to admins authenticate in the app.
+- ```POST /sessions``` : allow admins to authenticate in the app.
+
+- When authenticated: 
+  - ```POST    /memberships``` : allow to create a new membership option.
+  - ```GET     /memberships``` : allow to list all the membership option.
+  - ```GET     /memberships/:membershipId``` : allow to show a specific membership option.
+  - ```DELETE  /memberships/:membershipId``` : allow to delete a specific membership option.
 
 ### Tests Suite
+
+All the current tests are stored in the ```__tests__``` folder inside each module.
 
 - module: user
   - CreateSessionService - Unit tests
   - CreateSession: Integration Test
+
+- mdoule:
+  - CreateMembershipService - Unit tests
+  - ListMembershipService - Unit tests
+  - Memberships - Integration tests
 
 ### How to build:
 
@@ -54,6 +67,13 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 ### Running tests:
 
 - First of all, ensure that you have postgres running with a database called "gympoint_tests".
+
+- Edit the database property inside ormconfig.json.
+```json 
+  "database": "gympoint_tests"
+``` 
+
+- Run the tests
 
 ````
   // using yarn
