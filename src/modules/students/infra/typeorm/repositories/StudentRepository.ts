@@ -24,6 +24,10 @@ class StudentRepository implements IStudentRepository {
       },
     });
   }
+
+  public async findAll(): Promise<Student[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default StudentRepository;

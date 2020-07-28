@@ -161,4 +161,29 @@ describe('/memberships', () => {
     expect(response.body).toHaveProperty('height');
     expect(response.body).toHaveProperty('weight');
   });
+
+  it('should be able to list all the students', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Student Test',
+        email: 'student@test.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const response = await request(app)
+      .get('/students')
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(1);
+  });
 });

@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateStudentService from '../../services/CreateStudentService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
+import ListStudentService from '../../services/ListStudentService';
 
 class StudentController {
   public async create(
@@ -34,6 +35,13 @@ class StudentController {
     }
 
     return undefined;
+  }
+
+  public async index(_: Request, response: Response): Promise<Response> {
+    const service = container.resolve(ListStudentService);
+    const students = await service.execute();
+
+    return response.json(students);
   }
 }
 
