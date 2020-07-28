@@ -5,6 +5,7 @@ import CreateStudentService from '../../services/CreateStudentService';
 import ListStudentService from '../../services/ListStudentService';
 import ShowStudentService from '../../services/ShowStudentService';
 import DeleteStudentService from '../../services/DeleteStudentService';
+import UpdateStudentService from '../../services/UpdateStudentService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class StudentController {
@@ -75,6 +76,32 @@ class StudentController {
     try {
       const students = await service.execute(studentId);
       return response.json(students);
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
+  }
+
+  public async update(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { studentId } = request.params;
+    const service = container.resolve(UpdateStudentService);
+
+    try {
+      const { name, email, age, height, weight } = request.body;
+      const student = await service.execute({
+        id: studentId,
+        name,
+        email,
+        age,
+        height,
+        weight,
+      });
+      return response.json(student);
     } catch (err) {
       next(err);
     }

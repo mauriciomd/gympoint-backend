@@ -7,4 +7,5 @@ export default interface IStudentRepository {
   findById(studentId: string): Promise<Student | undefined>;
   findAll(): Promise<Student[]>;
   delete(studentId: string): Promise<void>;
+  update(student: Student): Promise<Student>;
 }

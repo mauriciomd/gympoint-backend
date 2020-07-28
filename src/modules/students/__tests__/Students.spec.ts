@@ -15,10 +15,10 @@ describe('/memberships', () => {
   });
 
   afterAll(async () => {
-    // await connection.query('DROP TABLE IF EXISTS memberships');
-    // await connection.query('DROP TABLE IF EXISTS users');
-    // await connection.query('DROP TABLE IF EXISTS migrations');
-    // await connection.query('DROP TABLE IF EXISTS students');
+    await connection.query('DROP TABLE IF EXISTS memberships');
+    await connection.query('DROP TABLE IF EXISTS users');
+    await connection.query('DROP TABLE IF EXISTS migrations');
+    await connection.query('DROP TABLE IF EXISTS students');
 
     await connection.close();
   });
@@ -229,7 +229,7 @@ describe('/memberships', () => {
     expect(response.status).not.toBe(200);
   });
 
-  it('should be able to delete show a student by id', async () => {
+  it('should be able to delete a student by id', async () => {
     const user = await request(app).post('/sessions').send({
       email: 'admin@gympoint.com',
       password: '123456',
@@ -256,5 +256,33 @@ describe('/memberships', () => {
 
     expect(response.status).toBe(200);
     expect(studentList.body).toHaveLength(0);
+  });
+
+  it('should be able to update a student by id', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const response = await request(app)
+      .put(`/students/${student.body.id}`)
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        email: 'new-valid@student-email.com',
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.email).toBe('new-valid@student-email.com');
   });
 });

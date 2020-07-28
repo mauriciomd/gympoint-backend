@@ -40,6 +40,12 @@ class StudentRepository implements IStudentRepository {
   public async delete(studentId: string): Promise<void> {
     await this.ormRepository.delete({ id: studentId });
   }
+
+  public async update(student: Student): Promise<Student> {
+    const updatedStudent = await this.ormRepository.save(student);
+
+    return updatedStudent;
+  }
 }
 
 export default StudentRepository;

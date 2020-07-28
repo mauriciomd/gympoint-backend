@@ -35,6 +35,17 @@ class FakeStudentRepository implements IStudentRepository {
       student => student.id !== studentId,
     );
   }
+
+  public async update(student: Student): Promise<Student> {
+    const storedStudentIndex = this.storedStudents.findIndex(
+      storedStudent => storedStudent.id === student.id,
+    );
+
+    this.storedStudents.splice(storedStudentIndex, 1);
+    this.storedStudents.push(student);
+
+    return student;
+  }
 }
 
 export default FakeStudentRepository;
