@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateStudentService from '../../services/CreateStudentService';
 import ListStudentService from '../../services/ListStudentService';
 import ShowStudentService from '../../services/ShowStudentService';
+import DeleteStudentService from '../../services/DeleteStudentService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class StudentController {
@@ -52,6 +53,24 @@ class StudentController {
   ): Promise<Response | undefined> {
     const { studentId } = request.params;
     const service = container.resolve(ShowStudentService);
+
+    try {
+      const students = await service.execute(studentId);
+      return response.json(students);
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { studentId } = request.params;
+    const service = container.resolve(DeleteStudentService);
 
     try {
       const students = await service.execute(studentId);

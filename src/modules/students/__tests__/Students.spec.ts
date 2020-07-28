@@ -228,4 +228,33 @@ describe('/memberships', () => {
 
     expect(response.status).not.toBe(200);
   });
+
+  it('should be able to delete show a student by id', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const response = await request(app)
+      .delete(`/students/${student.body.id}`)
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    const studentList = await request(app)
+      .get('/students')
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(studentList.body).toHaveLength(0);
+  });
 });

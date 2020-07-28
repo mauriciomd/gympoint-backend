@@ -6,4 +6,5 @@ export default interface IStudentRepository {
   findByEmail(email: string): Promise<Student | undefined>;
   findById(studentId: string): Promise<Student | undefined>;
   findAll(): Promise<Student[]>;
+  delete(studentId: string): Promise<void>;
 }

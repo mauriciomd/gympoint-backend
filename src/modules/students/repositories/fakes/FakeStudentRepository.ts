@@ -29,6 +29,12 @@ class FakeStudentRepository implements IStudentRepository {
   public async findAll(): Promise<Student[]> {
     return [...this.storedStudents];
   }
+
+  public async delete(studentId: string): Promise<void> {
+    this.storedStudents = this.storedStudents.filter(
+      student => student.id !== studentId,
+    );
+  }
 }
 
 export default FakeStudentRepository;
