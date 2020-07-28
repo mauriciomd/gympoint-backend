@@ -10,7 +10,7 @@ let listMembershipService: ListMembershipService;
 let createMembershipService: CreateMembershipService;
 let fakeMembershipRepository: FakeMembershipRepository;
 
-describe('Unit test: ShowMembershipService', () => {
+describe('Unit test: DeleteMembershipService', () => {
   beforeEach(() => {
     fakeMembershipRepository = new FakeMembershipRepository();
     createMembershipService = new CreateMembershipService(
