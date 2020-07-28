@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
 import CreateStudentService from '../../services/CreateStudentService';
-import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 import ListStudentService from '../../services/ListStudentService';
+import ShowStudentService from '../../services/ShowStudentService';
+import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class StudentController {
   public async create(
@@ -42,6 +43,24 @@ class StudentController {
     const students = await service.execute();
 
     return response.json(students);
+  }
+
+  public async show(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { studentId } = request.params;
+    const service = container.resolve(ShowStudentService);
+
+    try {
+      const students = await service.execute(studentId);
+      return response.json(students);
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
   }
 }
 

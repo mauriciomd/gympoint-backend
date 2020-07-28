@@ -22,6 +22,10 @@ class FakeStudentRepository implements IStudentRepository {
     return this.storedStudents.find(student => student.email === email);
   }
 
+  public async findById(studentId: string): Promise<Student | undefined> {
+    return this.storedStudents.find(student => student.id === studentId);
+  }
+
   public async findAll(): Promise<Student[]> {
     return [...this.storedStudents];
   }

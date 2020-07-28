@@ -25,6 +25,14 @@ class StudentRepository implements IStudentRepository {
     });
   }
 
+  public async findById(studentId: string): Promise<Student | undefined> {
+    return this.ormRepository.findOne({
+      where: {
+        id: studentId,
+      },
+    });
+  }
+
   public async findAll(): Promise<Student[]> {
     return this.ormRepository.find();
   }

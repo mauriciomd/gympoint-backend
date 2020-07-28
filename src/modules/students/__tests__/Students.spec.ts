@@ -15,10 +15,10 @@ describe('/memberships', () => {
   });
 
   afterAll(async () => {
-    await connection.query('DROP TABLE IF EXISTS memberships');
-    await connection.query('DROP TABLE IF EXISTS users');
-    await connection.query('DROP TABLE IF EXISTS migrations');
-    await connection.query('DROP TABLE IF EXISTS students');
+    // await connection.query('DROP TABLE IF EXISTS memberships');
+    // await connection.query('DROP TABLE IF EXISTS users');
+    // await connection.query('DROP TABLE IF EXISTS migrations');
+    // await connection.query('DROP TABLE IF EXISTS students');
 
     await connection.close();
   });
@@ -185,5 +185,47 @@ describe('/memberships', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
+  });
+
+  it('should be able to list show a student by id', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const response = await request(app)
+      .get(`/students/${student.body.id}`)
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('name');
+    expect(response.body).toHaveProperty('age');
+    expect(response.body).toHaveProperty('height');
+    expect(response.body).toHaveProperty('weight');
+  });
+
+  it('should not be able to list show a student without a valid id', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const response = await request(app)
+      .get('/students/invalid-student-id')
+      .set('Authorization', `bearer ${user.body.token}`);
+
+    expect(response.status).not.toBe(200);
   });
 });
