@@ -17,11 +17,17 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 
 - ```POST /sessions``` : allow admins to authenticate in the app.
 
-- When authenticated: 
+- When authenticated - admin routes: 
   - ```POST    /memberships``` : allow to create a new membership option.
   - ```GET     /memberships``` : allow to list all the membership option.
   - ```GET     /memberships/:membershipId``` : allow to show a specific membership option.
   - ```DELETE  /memberships/:membershipId``` : allow to delete a specific membership option.
+
+  - ```POST    /students``` : allow to create a new student.
+  - ```GET     /students``` : allow to list all the student.
+  - ```PUT     /students/:studentId``` : allow to update a specific student.
+  - ```GET     /students/:studentId``` : allow to show a specific student.
+  - ```DELETE  /students/:studentId``` : allow to delete a specific membership.
 
 ### Tests Suite
 
@@ -31,9 +37,11 @@ All the current tests are stored in the ```__tests__``` folder inside each modul
   - CreateSessionService - Unit tests
   - CreateSession: Integration Test
 
-- mdoule:
+- mdoule: membership
   - CreateMembershipService - Unit tests
   - ListMembershipService - Unit tests
+  - ShowMembershipService - Unit tests
+  - DeleteMembershipService - Unit tests
   - Memberships - Integration tests
 
 ### How to build:
@@ -75,7 +83,7 @@ All the current tests are stored in the ```__tests__``` folder inside each modul
 
 - Run the tests
 
-````
+```
   // using yarn
   yarn test
 
