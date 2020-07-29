@@ -15,6 +15,7 @@ describe('/sessions', () => {
     await connection.query('DROP TABLE IF EXISTS memberships');
     await connection.query('DROP TABLE IF EXISTS migrations');
     await connection.query('DROP TABLE IF EXISTS students');
+    await connection.query('DROP TABLE IF EXISTS enrollments');
 
     await connection.close();
   });
