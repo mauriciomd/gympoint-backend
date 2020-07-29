@@ -9,6 +9,9 @@ import MembershipRepository from '../../modules/memberships/infra/typeorm/reposi
 import IStudentRepository from '../../modules/students/repositories/IStudentRepository';
 import StudentRepository from '../../modules/students/infra/typeorm/repositories/StudentRepository';
 
+import IEnrollmentRepository from '../../modules/enrollments/repositories/IEnrollmentRepository';
+import EnrollmentRepository from '../../modules/enrollments/infra/typeorm/repositories/EnrollmentRepository';
+
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 
 container.registerSingleton<IMembershipRepository>(
@@ -19,4 +22,9 @@ container.registerSingleton<IMembershipRepository>(
 container.registerSingleton<IStudentRepository>(
   'StudentRepository',
   StudentRepository,
+);
+
+container.registerSingleton<IEnrollmentRepository>(
+  'EnrollmentRepository',
+  EnrollmentRepository,
 );
