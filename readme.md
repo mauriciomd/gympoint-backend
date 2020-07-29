@@ -10,8 +10,9 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 - Jest and Supertest (TDD)
 - ExpressJS
 - BCryptJS
-- JsonWebToken
+- JsonWebToken (JWT)
 - TSyringe (dependency injection)
+- date-fns
 
 ### App endpoints:
 
