@@ -36,6 +36,9 @@ class Enrollment {
   @Column()
   endDate!: Date;
 
+  @Column()
+  total!: number;
+
   @CreateDateColumn()
   createdAt!: Date;
 
