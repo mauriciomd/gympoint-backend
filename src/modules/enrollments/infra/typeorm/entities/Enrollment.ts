@@ -19,15 +19,15 @@ class Enrollment {
   @Column()
   membershipId!: string;
 
-  @ManyToOne(() => Membership)
+  @ManyToOne(() => Membership, membership => membership.id, { eager: true })
   @JoinColumn({ name: 'membershipId' })
   membership!: Membership;
 
   @Column()
   studentId!: string;
 
-  @ManyToOne(() => Student)
-  @JoinColumn({ name: 'studentId' })
+  @ManyToOne(() => Student, student => student.id, { eager: true })
+  @JoinColumn({ name: 'studentId', referencedColumnName: 'id' })
   student!: Student;
 
   @Column()

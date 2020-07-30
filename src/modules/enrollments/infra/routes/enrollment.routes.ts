@@ -6,5 +6,6 @@ const router = Router();
 const enrollmentController = new EnrollmentController();
 
 router.post('/', enrollmentController.create);
+router.get('/', enrollmentController.index);
 
 export default router;

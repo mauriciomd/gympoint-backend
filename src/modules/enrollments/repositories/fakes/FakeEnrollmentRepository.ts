@@ -27,6 +27,10 @@ class EnrollmentRepository implements IEnrollmentRepository {
     this.storedEnrollments.push(enrollment);
     return enrollment;
   }
+
+  public async findAll(): Promise<Enrollment[]> {
+    return [...this.storedEnrollments];
+  }
 }
 
 export default EnrollmentRepository;

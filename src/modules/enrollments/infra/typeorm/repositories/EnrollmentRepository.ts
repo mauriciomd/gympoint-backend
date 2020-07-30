@@ -29,6 +29,10 @@ class EnrollmentRepository implements IEnrollmentRepository {
     await this.ormRepository.save(enrollment);
     return enrollment;
   }
+
+  public async findAll(): Promise<Enrollment[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default EnrollmentRepository;
