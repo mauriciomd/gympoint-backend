@@ -25,10 +25,14 @@ This is the backend app which is used to manage a gym, where an admin can sign u
   - ```DELETE  /memberships/:membershipId``` : allow to delete a specific membership option.
 
   - ```POST    /students``` : allow to create a new student.
-  - ```GET     /students``` : allow to list all the student.
+  - ```GET     /students``` : allow to list all the students.
   - ```PUT     /students/:studentId``` : allow to update a specific student.
   - ```GET     /students/:studentId``` : allow to show a specific student.
   - ```DELETE  /students/:studentId``` : allow to delete a specific membership.
+
+  - ```POST    /enrollments``` : allow to create a new enrollment.
+  - ```GET     /students``` : allow to list all the enrollments.
+  - ```DELETE  /students/:studentId``` : allow to delete a specific enrollment.
 
 ### Tests Suite
 
