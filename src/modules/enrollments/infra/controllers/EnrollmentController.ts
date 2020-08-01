@@ -4,6 +4,7 @@ import { parseISO } from 'date-fns';
 
 import CreateEnrollmentService from '../../services/CreateEnrollmentService';
 import ListEnrollmentService from '../../services/ListEnrollmentService';
+import DeleteEnrollmentService from '../../services/DeleteEnrollmentService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class EnrollmentController {
@@ -42,6 +43,27 @@ class EnrollmentController {
     try {
       const service = container.resolve(ListEnrollmentService);
       const enrollments = await service.execute();
+
+      return response.json(enrollments);
+    } catch (err) {
+      next(err);
+    }
+    return undefined;
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { enrollmentId } = request.params;
+    try {
+      if (!enrollmentId) {
+        throw new HttpRequestError('Missing route param: enrollment id');
+      }
+
+      const service = container.resolve(DeleteEnrollmentService);
+      const enrollments = await service.execute(enrollmentId);
 
       return response.json(enrollments);
     } catch (err) {

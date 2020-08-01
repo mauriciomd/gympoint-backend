@@ -31,6 +31,18 @@ class EnrollmentRepository implements IEnrollmentRepository {
   public async findAll(): Promise<Enrollment[]> {
     return [...this.storedEnrollments];
   }
+
+  public async findById(enrollmentId: string): Promise<Enrollment | undefined> {
+    return this.storedEnrollments.find(
+      enrollment => enrollment.id === enrollmentId,
+    );
+  }
+
+  public async delete(enrollment: Enrollment): Promise<void> {
+    this.storedEnrollments = this.storedEnrollments.filter(
+      stored => stored.id !== enrollment.id,
+    );
+  }
 }
 
 export default EnrollmentRepository;

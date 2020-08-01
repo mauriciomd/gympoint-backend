@@ -33,6 +33,18 @@ class EnrollmentRepository implements IEnrollmentRepository {
   public async findAll(): Promise<Enrollment[]> {
     return this.ormRepository.find();
   }
+
+  public async findById(enrollmentId: string): Promise<Enrollment | undefined> {
+    return this.ormRepository.findOne({
+      where: {
+        id: enrollmentId,
+      },
+    });
+  }
+
+  public async delete(enrollment: Enrollment): Promise<void> {
+    await this.ormRepository.delete({ id: enrollment.id });
+  }
 }
 
 export default EnrollmentRepository;
