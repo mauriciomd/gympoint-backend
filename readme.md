@@ -1,6 +1,7 @@
 ## Gympoint Backend
 
 ### About
+
 This is the backend app which is used to manage a gym, where an admin can sign up students, manage enrollments, and the memberships.
 
 ### Techs and libraries:
@@ -48,6 +49,12 @@ All the current tests are stored in the ```__tests__``` folder inside each modul
   - ShowMembershipService - Unit tests
   - DeleteMembershipService - Unit tests
   - Memberships - Integration tests
+
+- mdoule: enrollments
+  - CreateEnrollmentService - Unit tests
+  - ListEnrollmentService - Unit tests
+  - DeleteEnrollmentService - Unit tests
+  - Enrollments - Integration tests
 
 ### How to build:
 
