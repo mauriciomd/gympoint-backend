@@ -12,6 +12,9 @@ import StudentRepository from '../../modules/students/infra/typeorm/repositories
 import IEnrollmentRepository from '../../modules/enrollments/repositories/IEnrollmentRepository';
 import EnrollmentRepository from '../../modules/enrollments/infra/typeorm/repositories/EnrollmentRepository';
 
+import ICheckinRepository from '../../modules/checkins/repositories/ICheckinRepository';
+import CheckinRepository from '../../modules/checkins/infra/typeorm/repositories/ChekinsRepository';
+
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 
 container.registerSingleton<IMembershipRepository>(
@@ -27,4 +30,9 @@ container.registerSingleton<IStudentRepository>(
 container.registerSingleton<IEnrollmentRepository>(
   'EnrollmentRepository',
   EnrollmentRepository,
+);
+
+container.registerSingleton<ICheckinRepository>(
+  'CheckinRepository',
+  CheckinRepository,
 );
