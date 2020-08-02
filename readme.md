@@ -60,6 +60,11 @@ All the current tests are stored in the ```__tests__``` folder inside each modul
   - DeleteEnrollmentService - Unit tests
   - Enrollments - Integration tests
 
+- module: checkins
+  - ListCheckinService - Unit tests
+  - DeleteCheckinService - Unit tests
+  - Checkins - Integration tests
+
 ### How to build:
 
 - Requeriments:
