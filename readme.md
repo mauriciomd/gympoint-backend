@@ -35,6 +35,10 @@ This is the backend app which is used to manage a gym, where an admin can sign u
   - ```GET     /students``` : allow to list all the enrollments.
   - ```DELETE  /students/:studentId``` : allow to delete a specific enrollment.
 
+- Students routes (it does not require authentication):
+  - ```POST    /checkins/:studentId```: allow to create a new check-in.
+  - ```GET     /checkins/:studentId```: allow to list all the student check-ins.
+
 ### Tests Suite
 
 All the current tests are stored in the ```__tests__``` folder inside each module.
