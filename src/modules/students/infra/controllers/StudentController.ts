@@ -52,11 +52,15 @@ class StudentController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | undefined> {
-    const { studentId } = request.params;
+    const { email } = request.query;
     const service = container.resolve(ShowStudentService);
 
     try {
-      const students = await service.execute(studentId);
+      if (!email) {
+        throw new HttpRequestError('Missing route param: email');
+      }
+
+      const students = await service.execute(email.toString());
       return response.json(students);
     } catch (err) {
       next(err);

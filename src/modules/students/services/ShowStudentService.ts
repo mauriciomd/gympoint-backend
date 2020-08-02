@@ -15,10 +15,10 @@ class ListStudentService {
     this.studentRepository = studentRepository;
   }
 
-  public async execute(studentId: string): Promise<Student> {
-    const student = await this.studentRepository.findById(studentId);
+  public async execute(email: string): Promise<Student> {
+    const student = await this.studentRepository.findByEmail(email);
     if (!student) {
-      throw new HttpRequestError('Invalid student id');
+      throw new HttpRequestError('Invalid student email');
     }
 
     return student;
