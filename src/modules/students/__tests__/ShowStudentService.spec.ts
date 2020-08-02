@@ -24,9 +24,9 @@ describe('Unit test: ShowStudentService', () => {
       weight: 110,
     });
 
-    const response = await sut.execute(student.id);
+    const response = await sut.execute(student.email);
 
-    expect(student.id).toBe(response.id);
+    expect(response.id).toBe(student.id);
   });
 
   it('should not be able to show a Student without a valid id', async () => {

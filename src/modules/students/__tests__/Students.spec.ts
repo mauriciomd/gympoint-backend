@@ -4,7 +4,7 @@ import { createConnection, Connection } from 'typeorm';
 import app from '../../../shared/infra/http/app';
 
 let connection: Connection;
-describe('/memberships', () => {
+describe('/students', () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
@@ -189,7 +189,7 @@ describe('/memberships', () => {
     expect(response.body).toHaveLength(1);
   });
 
-  it('should be able to list show a student by id', async () => {
+  it('should be able to show a student by email', async () => {
     const user = await request(app).post('/sessions').send({
       email: 'admin@gympoint.com',
       password: '123456',
@@ -207,7 +207,7 @@ describe('/memberships', () => {
       });
 
     const response = await request(app)
-      .get(`/students/${student.body.id}`)
+      .get(`/students/show?email=${student.body.email}`)
       .set('Authorization', `bearer ${user.body.token}`);
 
     expect(response.status).toBe(200);
