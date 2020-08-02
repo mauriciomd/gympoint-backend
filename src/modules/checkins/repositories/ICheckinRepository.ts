@@ -9,4 +9,5 @@ export default interface ICheckinRepository {
     startDate: Date,
     endDate: Date,
   ): Promise<number>;
+  findAllByStudent(studentId: string): Promise<Checkin[]>;
 }

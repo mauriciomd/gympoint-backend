@@ -59,6 +59,17 @@ class CheckinRepository implements ICheckinRepository {
 
     return checkins;
   }
+
+  public async findAllByStudent(studentId: string): Promise<Checkin[]> {
+    return this.ormRepository.find({
+      where: {
+        studentId,
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
+  }
 }
 
 export default CheckinRepository;

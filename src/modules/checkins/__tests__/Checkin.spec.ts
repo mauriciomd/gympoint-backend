@@ -72,4 +72,28 @@ describe('/checkins', () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('message');
   });
+
+  it('should be able to list all student check-ins', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Student Test',
+        email: 'student@test.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    await request(app).post(`/checkins/${student.body.id}`);
+
+    const response = await request(app).get(`/checkins/${student.body.id}`);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(1);
+  });
 });

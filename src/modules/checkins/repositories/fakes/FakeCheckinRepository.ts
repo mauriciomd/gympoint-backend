@@ -60,6 +60,12 @@ class FakeCheckinRepository implements ICheckinRepository {
 
     return count;
   }
+
+  public async findAllByStudent(studentId: string): Promise<Checkin[]> {
+    return this.storedCheckins.filter(
+      checkin => checkin.studentId === studentId,
+    );
+  }
 }
 
 export default FakeCheckinRepository;
