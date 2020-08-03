@@ -96,4 +96,72 @@ describe('/help-orders', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
   });
+
+  it('should be able to answer a help order', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const order = await request(app)
+      .post(`/help-orders/${student.body.id}`)
+      .send({
+        question: 'A valid question',
+      });
+
+    const response = await request(app)
+      .post(`/help-orders/${order.body.id}/answer`)
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        answer: 'a valid answer',
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('answer');
+    expect(response.body).toHaveProperty('answeredAt');
+    expect(response.body.answer).toEqual('a valid answer');
+  });
+
+  it('should not be able to answer a help order without an auth token', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    const order = await request(app)
+      .post(`/help-orders/${student.body.id}`)
+      .send({
+        question: 'A valid question',
+      });
+
+    const response = await request(app)
+      .post(`/help-orders/${order.body.id}/answer`)
+      .send({
+        answer: 'a valid answer',
+      });
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty('message');
+  });
 });

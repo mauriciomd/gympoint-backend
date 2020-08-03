@@ -8,6 +8,7 @@ import studentRoutes from '../../../../modules/students/infra/routes/students.ro
 import enrollmentRouter from '../../../../modules/enrollments/infra/routes/enrollment.routes';
 import checkinsRoutes from '../../../../modules/checkins/infra/routes/checkin.routes';
 import helpOrdersStudents from '../../../../modules/helpOrders/infra/routes/helpOrdersStudents.routes';
+import helpOrdersAdmin from '../../../../modules/helpOrders/infra/routes/helpOrdersAdmin.routes';
 
 const router = Router();
 const authMiddleware = container.resolve(RequireAuthenticateMiddleware);
@@ -20,5 +21,6 @@ router.use(authMiddleware.ensure.bind(authMiddleware));
 router.use('/memberships', membershipRoutes);
 router.use('/students', studentRoutes);
 router.use('/enrollments', enrollmentRouter);
+router.use('/help-orders', helpOrdersAdmin);
 
 export default router;

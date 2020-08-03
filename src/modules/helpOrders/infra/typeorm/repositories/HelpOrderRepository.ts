@@ -20,12 +20,23 @@ class HelpOrderRepository implements IHelpOrderRepository {
       question,
     });
 
-    await this.ormRepository.save(order);
-    return order;
+    return this.ormRepository.save(order);
   }
 
   public async findAll(): Promise<HelpOrder[]> {
     return this.ormRepository.find();
+  }
+
+  public async update(order: HelpOrder): Promise<HelpOrder> {
+    return this.ormRepository.save(order);
+  }
+
+  public async findById(orderId: string): Promise<HelpOrder | undefined> {
+    return this.ormRepository.findOne({
+      where: {
+        id: orderId,
+      },
+    });
   }
 }
 

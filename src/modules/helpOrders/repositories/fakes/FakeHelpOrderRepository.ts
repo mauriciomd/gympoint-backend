@@ -28,6 +28,21 @@ class FakeHelpOrderRepository implements IHelpOrderRepository {
   public async findAll(): Promise<HelpOrder[]> {
     return [...this.storedHelpOrders];
   }
+
+  public async update(order: HelpOrder): Promise<HelpOrder> {
+    const orderIndex = this.storedHelpOrders.findIndex(
+      storedOrder => storedOrder.id === order.id,
+    );
+
+    this.storedHelpOrders.splice(orderIndex, 1);
+    this.storedHelpOrders.push(order);
+
+    return order;
+  }
+
+  public async findById(orderId: string): Promise<HelpOrder | undefined> {
+    return this.storedHelpOrders.find(order => order.id === orderId);
+  }
 }
 
 export default FakeHelpOrderRepository;

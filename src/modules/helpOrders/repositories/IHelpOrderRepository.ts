@@ -4,4 +4,6 @@ import HelpOrder from '../infra/typeorm/entities/HelpOrder';
 export default interface IHelpOrderRepository {
   create(data: ICreateQuestionDTO): Promise<HelpOrder>;
   findAll(): Promise<HelpOrder[]>;
+  findById(orderId: string): Promise<HelpOrder | undefined>;
+  update(order: HelpOrder): Promise<HelpOrder>;
 }
