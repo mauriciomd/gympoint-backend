@@ -4,7 +4,7 @@ import IHelpOrderRepository from '../repositories/IHelpOrderRepository';
 import HelpOrder from '../infra/typeorm/entities/HelpOrder';
 
 @injectable()
-class CreateQuestionService {
+class ListUnansweredQuestionService {
   private helpOrderRepository: IHelpOrderRepository;
 
   constructor(
@@ -20,4 +20,4 @@ class CreateQuestionService {
   }
 }
 
-export default CreateQuestionService;
+export default ListUnansweredQuestionService;

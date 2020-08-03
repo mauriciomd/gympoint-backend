@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 
-import ListQuestionService from '../services/ListQuestionService';
+import ListQuestionService from '../services/ListUnansweredQuestionService';
 import FakeStudentRepository from '../../students/repositories/fakes/FakeStudentRepository';
 import FakeHelpOrderRepository from '../repositories/fakes/FakeHelpOrderRepository';
 
 let sut: ListQuestionService;
 let fakeStudentRepository: FakeStudentRepository;
 let fakeHelpOrderRepository: FakeHelpOrderRepository;
-describe('Unit test: ListQuestionService', () => {
+describe('Unit test: ListUnansweredQuestionService', () => {
   beforeEach(() => {
     fakeStudentRepository = new FakeStudentRepository();
     fakeHelpOrderRepository = new FakeHelpOrderRepository();
