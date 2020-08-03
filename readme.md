@@ -29,15 +29,24 @@ This is the backend app which is used to manage a gym, where an admin can sign u
   - ```GET     /students``` : allow to list all the students.
   - ```PUT     /students/:studentId``` : allow to update a specific student.
   - ```DELETE  /students/:studentId``` : allow to delete a specific membership.
-  - ```GET     /students/show?email=``` : allow to show a specific student by email.
 
   - ```POST    /enrollments``` : allow to create a new enrollment.
   - ```GET     /students``` : allow to list all the enrollments.
   - ```DELETE  /students/:studentId``` : allow to delete a specific enrollment.
 
+  - ```GET     /help-orders/```: allow to get all unanswered help orders.
+  - ```POST    /help-orders/:orderId/answer```: allow to answer a help order.
+
+
 - Students routes (it does not require authentication):
+  - ```GET     /students/show?email=``` : allow to retrive a specific student by email.
+
   - ```POST    /checkins/:studentId```: allow to create a new check-in.
   - ```GET     /checkins/:studentId```: allow to list all the student check-ins.
+
+  - ```POST    /help-orders/:studentId```: allow to create a new help order.
+  - ```GET     /help-orders/:studentId```: allow to list all the help orders of a specific student.
+
 
 ### Tests Suite
 
@@ -64,6 +73,13 @@ All the current tests are stored in the ```__tests__``` folder inside each modul
   - ListCheckinService - Unit tests
   - DeleteCheckinService - Unit tests
   - Checkins - Integration tests
+
+- module: helpOrder
+  - ListUnansweredQuestionService - Unit tests
+  - ListStudentQuestionService - Unit tests
+  - CreateQuestionService - Unit tests
+  - CreateAnswerService - Unit tests
+  - HelpOrders - Integration tests
 
 ### How to build:
 
