@@ -43,6 +43,10 @@ class FakeHelpOrderRepository implements IHelpOrderRepository {
   public async findById(orderId: string): Promise<HelpOrder | undefined> {
     return this.storedHelpOrders.find(order => order.id === orderId);
   }
+
+  public async findAllByStudent(studentId: string): Promise<HelpOrder[]> {
+    return this.storedHelpOrders.filter(order => order.studentId === studentId);
+  }
 }
 
 export default FakeHelpOrderRepository;

@@ -42,6 +42,14 @@ class HelpOrderRepository implements IHelpOrderRepository {
       },
     });
   }
+
+  public async findAllByStudent(studentId: string): Promise<HelpOrder[]> {
+    return this.ormRepository.find({
+      where: {
+        studentId,
+      },
+    });
+  }
 }
 
 export default HelpOrderRepository;

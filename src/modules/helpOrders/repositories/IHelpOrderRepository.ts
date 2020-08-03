@@ -6,4 +6,5 @@ export default interface IHelpOrderRepository {
   findAllUnanswered(): Promise<HelpOrder[]>;
   findById(orderId: string): Promise<HelpOrder | undefined>;
   update(order: HelpOrder): Promise<HelpOrder>;
+  findAllByStudent(studentId: string): Promise<HelpOrder[]>;
 }

@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
 import CreateQuestionService from '../../services/CreateQuestionService';
-import ListQuestionService from '../../services/ListQuestionService';
+import ListUnansweredQuestionService from '../../services/ListUnansweredQuestionService';
+import ListStudentQuestionService from '../../services/ListStudentQuestionService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class HelpOrderController {
@@ -38,10 +39,33 @@ class HelpOrderController {
   }
 
   public async index(_: Request, response: Response): Promise<Response> {
-    const service = container.resolve(ListQuestionService);
+    const service = container.resolve(ListUnansweredQuestionService);
     const orders = await service.execute();
 
     return response.json(orders);
+  }
+
+  public async show(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | undefined> {
+    const { studentId } = request.params;
+
+    try {
+      if (!studentId) {
+        throw new HttpRequestError('Missing route param: studentId');
+      }
+
+      const service = container.resolve(ListStudentQuestionService);
+      const orders = await service.execute(studentId);
+
+      return response.json(orders);
+    } catch (err) {
+      next(err);
+    }
+
+    return undefined;
   }
 }
 
