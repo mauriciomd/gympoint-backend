@@ -72,7 +72,7 @@ describe('/help-orders', () => {
     expect(response.body).toHaveProperty('question');
   });
 
-  it('should be able to list all the help orders', async () => {
+  it('should be able to list all the unanswered help orders', async () => {
     const user = await request(app).post('/sessions').send({
       email: 'admin@gympoint.com',
       password: '123456',
