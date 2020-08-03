@@ -19,10 +19,11 @@ describe('/enrollments', () => {
   afterAll(async () => {
     await connection.query('DROP TABLE IF EXISTS checkins');
     await connection.query('DROP TABLE IF EXISTS enrollments');
-    await connection.query('DROP TABLE IF EXISTS memberships');
+    await connection.query('DROP TABLE IF EXISTS helporders');
     await connection.query('DROP TABLE IF EXISTS students');
-    await connection.query('DROP TABLE IF EXISTS users');
+    await connection.query('DROP TABLE IF EXISTS memberships');
     await connection.query('DROP TABLE IF EXISTS migrations');
+    await connection.query('DROP TABLE IF EXISTS users');
 
     await connection.close();
   });
