@@ -10,7 +10,7 @@ import {
 
 import Student from '../../../../students/infra/typeorm/entities/Student';
 
-@Entity('helpOrders')
+@Entity('helporders')
 class HelpOrder {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
