@@ -17,7 +17,7 @@ This is the backend app which is used to manage a gym, where an admin can sign u
 
 ### App endpoints:
 
-- An Insomnia example file with all routes could be found [here](./.github/Insomnio.json)
+- An Insomnia example file with all routes could be found [here](.github/Insomnia.json)
 
 - ```POST /sessions``` : allow admins to authenticate in the app.
 
