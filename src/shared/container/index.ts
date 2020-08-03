@@ -15,6 +15,9 @@ import EnrollmentRepository from '../../modules/enrollments/infra/typeorm/reposi
 import ICheckinRepository from '../../modules/checkins/repositories/ICheckinRepository';
 import CheckinRepository from '../../modules/checkins/infra/typeorm/repositories/ChekinsRepository';
 
+import IHelpOrderRepository from '../../modules/helpOrders/repositories/IHelpOrderRepository';
+import HelpOrderRepository from '../../modules/helpOrders/infra/typeorm/repositories/HelpOrderRepository';
+
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 
 container.registerSingleton<IMembershipRepository>(
@@ -35,4 +38,9 @@ container.registerSingleton<IEnrollmentRepository>(
 container.registerSingleton<ICheckinRepository>(
   'CheckinRepository',
   CheckinRepository,
+);
+
+container.registerSingleton<IHelpOrderRepository>(
+  'HelpOrderRepository',
+  HelpOrderRepository,
 );
