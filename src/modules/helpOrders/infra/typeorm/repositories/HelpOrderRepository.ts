@@ -23,6 +23,10 @@ class HelpOrderRepository implements IHelpOrderRepository {
     await this.ormRepository.save(order);
     return order;
   }
+
+  public async findAll(): Promise<HelpOrder[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default HelpOrderRepository;

@@ -24,6 +24,10 @@ class FakeHelpOrderRepository implements IHelpOrderRepository {
     this.storedHelpOrders.push(order);
     return order;
   }
+
+  public async findAll(): Promise<HelpOrder[]> {
+    return [...this.storedHelpOrders];
+  }
 }
 
 export default FakeHelpOrderRepository;

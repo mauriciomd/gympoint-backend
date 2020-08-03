@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
 import CreateQuestionService from '../../services/CreateQuestionService';
+import ListQuestionService from '../../services/ListQuestionService';
 import HttpRequestError from '../../../../shared/errors/HttpRequestError';
 
 class HelpOrderController {
@@ -34,6 +35,13 @@ class HelpOrderController {
     }
 
     return undefined;
+  }
+
+  public async index(_: Request, response: Response): Promise<Response> {
+    const service = container.resolve(ListQuestionService);
+    const orders = await service.execute();
+
+    return response.json(orders);
   }
 }
 

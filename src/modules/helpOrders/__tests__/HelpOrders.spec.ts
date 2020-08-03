@@ -71,4 +71,29 @@ describe('/help-orders', () => {
     expect(response.body).toHaveProperty('id');
     expect(response.body).toHaveProperty('question');
   });
+
+  it('should be able to list all the help orders', async () => {
+    const user = await request(app).post('/sessions').send({
+      email: 'admin@gympoint.com',
+      password: '123456',
+    });
+    const student = await request(app)
+      .post('/students')
+      .set('Authorization', `bearer ${user.body.token}`)
+      .send({
+        name: 'Valid Student',
+        email: 'valid@student-email.com',
+        age: 33,
+        height: 190,
+        weight: 110,
+      });
+
+    await request(app).post(`/help-orders/${student.body.id}`).send({
+      question: 'A valid question',
+    });
+
+    const response = await request(app).get('/help-orders');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(1);
+  });
 });
