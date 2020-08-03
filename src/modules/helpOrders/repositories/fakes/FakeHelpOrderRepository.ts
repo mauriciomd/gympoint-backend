@@ -25,8 +25,8 @@ class FakeHelpOrderRepository implements IHelpOrderRepository {
     return order;
   }
 
-  public async findAll(): Promise<HelpOrder[]> {
-    return [...this.storedHelpOrders];
+  public async findAllUnanswered(): Promise<HelpOrder[]> {
+    return this.storedHelpOrders.filter(order => !order.answer);
   }
 
   public async update(order: HelpOrder): Promise<HelpOrder> {

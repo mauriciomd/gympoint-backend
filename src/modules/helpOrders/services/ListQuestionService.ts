@@ -15,7 +15,7 @@ class CreateQuestionService {
   }
 
   public async execute(): Promise<HelpOrder[]> {
-    const orders = await this.helpOrderRepository.findAll();
+    const orders = await this.helpOrderRepository.findAllUnanswered();
     return orders;
   }
 }

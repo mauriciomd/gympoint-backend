@@ -77,6 +77,7 @@ describe('/help-orders', () => {
       email: 'admin@gympoint.com',
       password: '123456',
     });
+
     const student = await request(app)
       .post('/students')
       .set('Authorization', `bearer ${user.body.token}`)
@@ -92,7 +93,10 @@ describe('/help-orders', () => {
       question: 'A valid question',
     });
 
-    const response = await request(app).get('/help-orders');
+    const response = await request(app)
+      .get('/help-orders')
+      .set('Authorization', `bearer ${user.body.token}`);
+
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
   });
@@ -102,6 +106,7 @@ describe('/help-orders', () => {
       email: 'admin@gympoint.com',
       password: '123456',
     });
+
     const student = await request(app)
       .post('/students')
       .set('Authorization', `bearer ${user.body.token}`)
@@ -138,6 +143,7 @@ describe('/help-orders', () => {
       email: 'admin@gympoint.com',
       password: '123456',
     });
+
     const student = await request(app)
       .post('/students')
       .set('Authorization', `bearer ${user.body.token}`)

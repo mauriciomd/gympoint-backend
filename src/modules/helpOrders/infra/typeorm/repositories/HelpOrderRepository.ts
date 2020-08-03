@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, IsNull } from 'typeorm';
 
 import { ICreateQuestionDTO } from '../../../dtos/ICreateQuestionDTO';
 import IHelpOrderRepository from '../../../repositories/IHelpOrderRepository';
@@ -23,8 +23,12 @@ class HelpOrderRepository implements IHelpOrderRepository {
     return this.ormRepository.save(order);
   }
 
-  public async findAll(): Promise<HelpOrder[]> {
-    return this.ormRepository.find();
+  public async findAllUnanswered(): Promise<HelpOrder[]> {
+    return this.ormRepository.find({
+      where: {
+        answer: IsNull(),
+      },
+    });
   }
 
   public async update(order: HelpOrder): Promise<HelpOrder> {

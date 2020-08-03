@@ -15,7 +15,7 @@ describe('Unit test: ListQuestionService', () => {
     sut = new ListQuestionService(fakeHelpOrderRepository);
   });
 
-  it('should be to list all the help orders', async () => {
+  it('should be to list all unanswered the help orders', async () => {
     const student = await fakeStudentRepository.create({
       name: 'valid name',
       email: 'valid@email.com',
