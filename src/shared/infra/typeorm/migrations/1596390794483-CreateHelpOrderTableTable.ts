@@ -25,12 +25,12 @@ class CreateHelpOrderTableTable1596390794483 implements MigrationInterface {
           },
           {
             name: 'answer',
-            type: 'uuid',
+            type: 'varchar',
             isNullable: true,
           },
           {
             name: 'answeredAt',
-            type: 'uuid',
+            type: 'timestamp',
             isNullable: true,
           },
           {
