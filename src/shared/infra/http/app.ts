@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
+import cors from 'cors';
 
 // Dependency injection
 import '../../../modules/users/providers';
@@ -15,7 +16,7 @@ import errorHandler from './middlewares/errorHandler';
 import appRoutes from './routes';
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(appRoutes);
 app.use(errorHandler);
